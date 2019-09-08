@@ -2,567 +2,226 @@
 
 % Packages to use
 \usepackage{setspace}
+\usepackage{url}
 \usepackage[table]{xcolor}
 \usepackage{booktabs}
-\usepackage{booktabs}
-\usepackage{longtable}
+\usepackage{float}
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{natbib}
+\doublespacing
 \usepackage[margin=1in]{geometry}
+\usepackage[english]{isodate}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\usepackage{float}
-\rhead{S. Hogan-H}
-\lhead{Which Trend in Intergenerational Income Mobility?}
-\usepackage{setspace}
-\doublespacing
-\usepackage[flushleft]{threeparttable}
-\usepackage{longtable}
-
-\usepackage[english]{isodate}
-\usepackage{hyperref}
-\usepackage{amsmath}
+\rhead{S. Hogan-H, J. Lee}
+\lhead{Contemporary Monetary Policy, the Taylor Rule and the Recession}
 
 % Author
-\author{Senan Hogan-H\footnote{Undergraduate Research and Teaching Assistant at the Department of Economics, Pomona College. \newline This research was funded by the Pomona College Summer Undergraduate Research Project Fund, and I am very grateful for the help and supervision provided by the programme and Michael Steinberger, Pomona College.}}
+\author{Senan Hogan-H, Jiwon Lee\footnote{This paper was completed in accordance with requirements for the Claremont Graduate University class ``Time-Series Econometrics," Spring 2017.  We are grateful for the comments and guidance of Pierangelo De Pace, Pomona College Department of Economics.} \\ Pomona College}
 
 % Title
-\title{
-Which Trend in Intergenerational Income Mobility? \\ \large{Regression-Based Measures of Intergenerational Income Mobility in the Panel Study of Income Dynamics (PSID)}}
-
-
-
-\date{29 August 2017  \\
-\vspace{15mm}
-\textit{Working Paper}\footnote{\href{https://drive.google.com/file/d/0BwswqzI6_NHTdlFaM29Za3JnS0E/view?usp=sharing}{\color{blue}{\underline{A summary of this paper is available in poster form, in accordance with SURP funding requirements.}}}}}
+\title{Contemporary Monetary Policy, the Taylor Rule and the Recession: \\
+\Large{Testing a Reaction Function for the Federal Reserve 1987--2014 }} 
+\date{14 May 2017}
 
 
 %%% BEGIN %%%
 \begin{document}
-\maketitle
+
+\clearpage\maketitle
 \thispagestyle{empty}
 % Abstract
 \begin{abstract}
-I present evidence on static  estimates and time trends in intergenerational income mobility for the US using survey data by the dominant regression-based measures: the intergenerational elasticity of income and intergenerational rank-rank association.  I find the intergenerational income elasticity and rank-rank association to be estimated around 0.4 and 0.3 respectively, and evidence regarding changes across the income distribution and across demographic groups to be less conclusive.  A negative trend is found by both measures 1980--2014, in contrast to previous studies.  Lastly, I consider what these results mean for studies that attempt to show trends in mobility in our dynamic and changing economy, with application to between group comparisons and using survey data in the study of intergenerational mobility.
+This paper tests a model for the Federal Reserve's Reaction Function, the monetary policy response to economic developments in the context of a Taylor Rule and a Taylor with discretion for a time series context.  We consider how the reaction function has changed over two distinct time periods: the tenures of Chairmen Greenspan and Bernanke, updating the methods and results of \cite{judd1998taylor} to a new era of monetary policy.  We find that a Taylor-rule framework is an effective way to analyse and consider monetary policy for Chairman Greenspan's tenure; we find it is not effective for analysis during Chairman Bernanke's tenure.  We present reasoning for what the Great Recession and the monetary policy environment means for a Taylor rule and the Federal Reserve's approach to monetary policy.
 \end{abstract}
 
+% INTRODUCTION
 \newpage
 \setcounter{page}{1}
-
-% Introduction
 \section{Introduction}
+Over the past several years, monetary policy reaction functions have considerably attracted the attention of macroeconomists. Within a macroeconomic model, the reaction function can be used to evaluate the actions and policy of central banks, and through these estimations, researchers have aimed to gain insight into the Federal Reserve's behavior. The most popular tool that has been used in estimating the Fed's reaction function is the Taylor Rule. Created by John Taylor (1993), the Taylor Rule is a simple linear rule that captures the dependence of the interest rate from the changes of the output and the inflation. While, the Taylor rule has been highly utilized in various empirical studies of monetary policy and theoretical framework for understanding the Federal Bank's reaction function, its specification has been recently questioned by several macroeconomists. Thus, there have been several efforts to modify the Taylor Rule to better estimate the Reserve's reaction functions.
 
-There is a growing perception that intergenerational mobility is falling in the US.  The fall in mobility is often given in the broader context of rapidly rising income and wealth inequality, zoning restrictions and de facto segregation by income and race, or even advantages for the wealthy in the tax code and the colleges admissions process.\footnote{See \cite{reeves2017dream} for a non-technical overview and discussion of these issues.}  The economic literature has focused largely on estimating static measures intergenerational income mobility, and recently has been mixed on finding a time trend for recent years.
+This paper tests a model for the Federal Reserve's Reaction Function -- the monetary policy response to economic developments -- from 1987 to 2014 in the context of a Taylor Rule and a Taylor with discretion for a time series context. In our analysis, we utilize a variant of Taylor's simple specification in understanding the Federal Reserve's reaction functions. Our analysis extends that of Judd \& Rudebusch (1998), who suggest several alternative specifications to the Taylor Rule to better capture the inconsistency in the Federal Reserve’s reactions. First, rather than taking parameters as given, we econometrically estimate both the simple and the dynamic Taylor rule and the corresponding reaction function weights. Second, we account for the co-integrating relationship that might stem from the Federal Reserve’s gradual responses over time and utilize an estimation method that takes the non-stationarity into account, namely an error-correction model. Lastly, we consider the changes in the Federal Reserve Chairmanship as an important and identifiable way to understand the changes in the composition of the Federal Open Market Committee, which might shift the preferences and conceptions of the policymakers involved. Thus, we separate our analysis by the different chairmen regimes, more specifically, those of Chairman Greenspan and Bernanke. We find that a Taylor-rule framework is an effective way to analyze and the Reaction Function of the Reserve before Chairman Bernanke's tenure, yet not effective afterwards during the Great Recession and its aftermath.
 
-I present regression-based measures for intergenerational income mobility, and apply them to Panel Study of Income Dynamics (PSID) in order to build on the work and methods of \cite{lee2009trends} and \cite{chetty2014united}.  I also apply the methods in various methods for differences in intergenerational mobility to demonstrate what lacks in the regression-based measures, especially when applied to (limited) survey data.  I go on to discuss the use of non-parametric measures in comparison.
+	Section 2 provides a literature review on the Reserve's Reaction function and the Taylor Rule. Section 3 describes the econometric specifications and methods used in this paper, along with the description of data. Section 4 includes the results, and the final section concludes.
 
-I estimate intergenerational income mobility for representative survey participants born between 1950 and 1989, and time trends observed over 1977--2014.  The measures considered are the intergenerational income elasticity and the intergenerational rank-rank association.  I find that the measures show a small but significant downward trend in mobility over time, wild deviations in mobility across groups (by interaction-based regressions methods), and unstable trends when estimated across quantiles.  These findings shine new light on trends in intergenerational mobility, updated to newer data for 2014, and demonstrate how traditional regression-based measures of intergenerational mobility perform in studies applied to limited survey data. 
-
-My paper is structured as follows.  Section 2 surveys current literature on intergenerational income mobility.  Section 3 describes a framework for measuring intergenerational income mobility in multiple different ways with empirical specifications, as well as a description of the PSID data set they are applied to.  Section 4 presents the empirical results of each measure.  Section 5 discusses the findings of the paper, with lessons to learn for studies that use larger, more reliable administrative data sets in studying intergenerational income mobility.
 
 % LIT REVIEW
 \section{Literature Review}
-The idea of the American Dream was popularised in \cite{truslow1938epic}, and was dependent on the idea of equality of opportunity: ``Opportunity for each according to ability or achievement," and not opportunity according to social status and birth as in the (then) old world.  It follows that a level of intergenerational mobility, relative change in status or social ranking across generations, plays important part in maintaining the American Dream.\footnote{While research on mobility is regularly discussed in the context of inequality of opportunity (as they should be), direct applications to opportunity are not directly straightforward -- i.e. stability in intergenerational mobility may not directly imply stability regarding equality of opportunity, as often stated.  See \cite{van2001three} for a rigorous structure on this interconnection.}  Income is the main measure for social status used in intergenerational mobility studies, so that previous research has concentrated on the statistical and econometric relationship between the income of children and their parents.  However, there is not universal agreement on the measurement of intergenerational income mobility.
+Macroeconomists have long been interested in modeling the Federal Reserve’s “reaction function” - that is, a model of how the Reserve alters monetary policy in response to economic developments (Judd \& Rudebusch, 1998). The Fed's reaction function plays an important role in a wide variety of macroeconomic analyses. The Reserve's reaction function can provide a basis for forecasting changes in the Fed's policy instrument, namely short term interest rates, and it is an important element in evaluating the Fed's policy and the effects of their policy actions or economic shocks (Rabin, 2001). For these benefits of understanding the reaction function, several researchers have been committed to gain insight into central bank behavior through the estimations of these reaction functions. 
 
-\cite{solon1992intergenerational} popularised the use of the intergenerational income elasticity (IGE -- see section 3.1) to measure intergenerational income mobility.  Longitudinal panel data that are linked to parents and representative for the US population are relatively inabundant so that \cite{solon1992intergenerational} was the first to study mobility using such a data set (PSID), estimating the IGE to be at least 0.4.\footnote{Whereas previous IGE estimates were biased downward by using data samples with significant measurement error and/or unrepresentative samples.}  Furthermore, \cite{lee2009trends} adjusted the methods to estimate time trends in the IGE, estimating the IGE around 0.4 to 0.5 and not declining from 1977--2000.
+The most popular tool that has been used by macroeconomists in estimating the reaction function is the Taylor Rule. John Taylor (1993) made an important contribution to this field with a simple characterization of the Federal Reserve's monetary policy, and he provided a linear function of two key variables, inflation and output, as a simple rule of thumb for the Reserve's monetary policy. Since its introduction in his work ``Discretionary vs Policy Rule in Practice," the Taylor Rule has been highly utilized in various empirical studies of monetary policy and theoretical framework for understanding the Federal Bank's reaction function (Judd \& Rudebusch, 1998).
 
-More recently, other statistical measures for mobility have become more common.  \cite{chetty2014united} argue that a rank-rank association is a better measure of intergenerational mobility as it only depends on the joint distribution of parent and children's incomes.  They apply this method to IRS administrative data to find no fall in mobility for cohorts born between 1971 and 1993.  \cite{chetty2014land} use similar methods to find vast differences in mobility according to locality in the US, as well as the characteristics of localities associated with high or low in mobility.
+The Taylor Rule specifies that the real federal funds rate reacts to two variables: deviations of inflation from the target inflation and gap between real output and the potential output (Taylor, 1993). This simple rule relates a plausible Federal Reserve instrument, namely the short-run interest rate, to the goals of stabilizing inflation and output growth. The Taylor Rule's systematic and relatively straightforward approach has numerous advantages, such as serving as a useful guide to the Federal Open Market Committee when it sets monetary policy, helping set reliable parameters for people involved in the financial industry, and allowing the Reserve pro-actively send signals to the public (Kohn, 2007; Vitruk, 2014). \nocite{kohn2007john} \nocite{vitruk2014development} 
 
-Transition probabilities, often presented as part of matrices, have been especially useful to show differences in mobility according to demographics.  
-\cite{shorrocks1978measurement} defined a transition matrix as rows of corresponding probabilities for movement from defined positions to another defined position (regularly quantiles) in the income distribution.  \cite{Mazumder2014} does note the persistent lower mobility for African-Americans by this measure, contending that there are surprisingly few studies that specifically focus on probabilities of reaching a top income quantile for children born to lower quantile parents, and racial demographics.\footnote{Especially given how conditional probabilities lend to splitting probabilities by demographic differences.}  However, transition matrices are regularly used as a centre-point in reports, such as \cite{blanden2005intergenerational} and \cite{sawhill2008trends}, due to their non-technical nature and ease of understanding.  \cite{chetty2014united} see no change in probability of children born to parents in the bottom quintile of income reaching the top for cohorts born between 1971 and 1993.
+Several recent studies suggest that simple Taylor-type reaction functions were found to perform almost as well as optimal, forecast-based reaction functions that incorporate all the information available in the models examined. For example, Orphanides (2002) finds that the Fed's policies for many periods can be broadly interpreted in terms of the Taylor-rule framework with surprising consistency. Judd and Rudebusch (1998) also conclude that a Taylor-rule framework is a useful way to summarize key elements of monetary policy from 1970 to 1997. 
 
-\cite{bhattacharya2011nonparametric} develop a newer measure for intergenerational mobility to consider differences between white and black Americans, with National Longitudinal Survey of Youth data. They find that black Americans experience lower relative upward mobility than white Americans, and that lower adolescent  cognitive skills (as measured by test scores) largely explain the difference.  \cite{chetty2017fading} explore absolute upward mobility in the US with administrative data to show a massive decline for cohorts born between 1940 and 1984, related to a change in the distribution of gain from economic growth over the corresponding time period.
+While the Taylor rule has reached widespread popularity, not all researchers agree that its framework provides a definite representation of the Fed's behavior. For example, \cite{khoury1990federal} surveys several empirical Reserve reaction functions from various studies and finds little consistency in the significance of various regressors in those reaction functions. Moreover, using a VAR model from 1984 to 2003, \cite{galbraith2007fed} conclude that the Reserve does not target inflation or react to ``inflation signals,” and rather reacts to the very ``real" signal sent by unemployment, suggesting that a ``baseless fear of full employment" is a principal force behind monetary policy. 
 
-Over the same time that previous studies have looked at intergenerational mobility, there are notable dynamics at play in the US economy at large.  Geographic mobility, by interstate interstate migration, has decreased steadily since the 1980s according to \cite{NBERw20065}.  A racial income gap persists in the 21st century -- see \cite{reich2017racial} for an overview of research on racial income disparities.  And there has been a pronounced increase in income inequality over the second half of the 20th century, illuminated in the world famous ``Capital in the 21st Century'' by \cite{piketty2017capital}.  
+Accordingly, the Taylor Rule’s specification and its validity in estimating the Fed's reaction function have recently been a concern for some macroeconomists. Most importantly, several studies point out that the prior literature ignores the time series components of the variables included in the model. For instance, \cite{siklos2006estimating} show that if variables involved in the Taylor rule specification are integrated of order one -- that is have roots close to unity -- misspecified regressions would provide spurious results. \nocite{siklos2006estimating} Siklos's (2006) study demonstrates that the econometric properties of the model should be carefully investigated in order to use an estimated Taylor rule to evaluate the Fed's reactions or making statements about its preferences over time.
 
-There are a few studies that have examined how demographics and wider dynamics affect intergenerational income mobility.  \cite{corak2013income} compares mobility across developed nations (by the IGE) with a view to show differences in public policy, inequality and mobility.  \cite{krueger2012rise} famously took Corak's ideas further by presenting the ``Great Gatsby Curve,'' where higher inequality is negatively correlated with social mobility and implied to cause lower mobility.  \cite{eide1999factors} use quantile regression to show a static lower mobility (by the IGE) for poorer quantiles, mainly explained by differences in education.  Lastly, \cite{nichols2009detailed} are critical of regression and probabilistic based approaches to measuring mobility, instead focusing on the median and 10th, 90th percentiles to get a picture of mobility obscured by common measures.
+Despite the critiques on misspecification, most researchers agree that the original Taylor rule provides a useful benchmark for discussing the Fed's policy regimes. Thus, there has been an effort to modify the Taylor Rule to estimate the Fed's reactions better with alternative specifications. Consequently, an extensive number of variants of the basic Taylor Rule have been employed in several studies. For instance, some researchers (i.e. McCallum \& Nelson, 1999) \nocite{mccallum1999nominal} argue for the inclusion of lagged variables due to informational delays in central bank reaction; some (i.e. Orphanides, 2002) \nocite{orphanides2002unreliability} suggest to include forecasts of the regressors in order to capture the forward looking incentives of the central bank.  \cite{woodford2001taylor} suggests that a desirable rule is likely to require that the intercept be adjusted in response to fluctuations in the natural rate of interest, and should vary in response to a variety of real disturbances. He also suggests that an optimal rule should involve a commitment to ``history-dependent behavior," and indicates that more gradual adjustments of the interest rates should be considered.
 
-This paper uses the mentioned regression-based measures of intergenerational income mobility, applied to a widely used longitudinal data set.  The results are presented in the wider context of lessons learned from the mentioned studies to demonstrate some problems that studies using traditional regression-based measure and survey data to examine intergenerational mobility run in to.
+Notably, Judd \& Rudebusch (1998) make a several modifications to the original Taylor Rule to provide a better estimation of the Fed’s policy over time. First, they econometrically estimates the reaction function weights rather than simply choosing parameters as in the original Taylor Rule. Furthermore, they utilize a variant of the basic Taylor Rule called the Dynamic Taylor Rule, a common alteration of Taylor’s Rule takes into account that the Reserve gradually and smoothly adjusts the interest rate over time. With the Dynamic Taylor Rule framework, they utilize an error-correction model to account for the presence of unit-roots and co-integrating relationships in the original model, and consequently to avoid spurious regressions. 
 
-% Methods
-\section{Methods and Empirical Specifications}
-The Panel Study of Income Dynamics is the longest running longitudinal household survey in the world.  It collects information on individuals by survey biennially for 18,000 individuals living in 5,000 families in the US, and provide sample weights to be used to represent the population of the US.  The Survey ran annually from 1968 to 1997 and biannually since -- up to most the most recent information available for 2015 (income for 2014).  Most importantly, PSID provides \textit{The Family Identification Mapping System}, a tool used to match individuals with their parents and thus generate a sample including variables for both children and their matched parents.  This makes the PSID a great resource for intergenerational income research, to analytically compare the income of individuals to the income of their parents.  It should be noted, too, that the PSID collects information mainly at the household and family level, for example by reporting household income as opposed to income per individual.  It follows that analysis pertaining to income in the PSID regularly use family level data, as will this analysis.
+Furthermore, Judd \& Rudebusch (1998) suggest an effective way to estimate the Federal Reserve's reaction function over time, and they attempt to capture the inconsistent reactions of the Reserve by capturing the changes in the composition of the Federal Open Market Committee (FOMC). The main hypothesis is that understanding the changes in the composition of the FOMC would provide an explanation for the inconsistency of the Fed’s reaction function over time. They insist that such compositional changes may bring to the policymakers with different preferences and different conceptions of the appropriate operation and likely transmission of monetary policy (Judd \& Rudebusch, 1998). There are many things that influence this composition, but specifically, one of the more important and identifiable ones is the changes in Fed Chairmanship. Changes associated with different Chairmen may be exogenous, but there also may be an endogenous element that represents an adaption to ``lessons" learned from prior experiences (Judd \& Rudebusch, 1998). Accordingly, the estimates in their paper indicate that a Taylor-type reaction function seems to capture some important elements of monetary policy during Alan Greenspan's tenure to date as Federal Reserve Chairman. Further, they also provide evidence that support their hypothesis about the influence of the Chairman on the Fed's reaction function by showing that the dynamic Taylor-type reaction functions estimated during the Burns, Volcker, and Greenspan periods appear to have differed in important ways from one another (Judd \& Rudebusch, 1998). 
 
+With the use of the Dynamic Taylor Rule and focusing on individual Reserve Chairmanship, Judd \& Rudebusch's (1998) investigation represent a step in the direction of uncovering the key elements and changes in Fed's behavior over time. By utilizing their analytical framework, we extend the analysis to the most recent chairmanship of Chairman Ben Bernanke (2006 - 2014) and compare his regime to that of Chairman Alan Greenspan (1984 - 2006). We are interested in analyzing the Bernanke period to investigate not only the possible changes in the Fed's reaction function from a new chairmanship, but also the Fed’s response to the Great Recession and its aftermath. Chairman Bernanke publicly argued that any mechanical formula, even if useful as a general policy guideline, could prove ineffective during especially tumultuous or unusual economic times (Miller, 2014). Thus, it is important to understand how the Fed, especially under Chairman Bernanke, reacts to deteriorating economic circumstances.
+
+Furthermore, the comparison between the Chairmen Greenspan's and Bernanke's regime is remarkable because both chairmen are proponents of the Fed’s current adjustable policy (Vitruk, 2014). Chairman Greenspan has stated that the Taylor Rule is too uncertain to work on a consistent basis, and similarly, while Chairman Bernanke has emphasized that he does not oppose the Taylor Rule as a guidepost for prudent monetary policy, he opposes ``applying [it] in a mechanical way" (Vitruk, 2014). While allowing the Federal Reserve to employ a flexible monetary policy approach is prudent, regulators and economists have nevertheless accepted the Taylor Rule's use as an economic guideline rather than a strict mandate (Yellen 1996).\nocite{yellen1996monetary} Therefore, understanding that both chairmen are proponents of flexible monetary policy while accepting the Taylor Rule as a guidepost, we are interested in how the Fed's reactions in these time periods can be effectively analyzed by the Taylor-rule framework.
+
+
+% METHODS
+\section{Methods}
+We use data for the US national economy, made available by the Federal Reserve Bank of St Louis, FRED Economic Data.  We consider the interest rate as the Federal Funds rate,\footnote{\cite{FEDFUNDS}} inflation given by the Consumer Price Index,\footnote{\cite{CPIU}} real Gross Domestic Product in Billions of Chained 2009 Dollars (seasonally adjusted annual rate),\footnote{\cite{GDPC1}} and real Potential Gross Domestic Product in Billions of Chained 2009 Dollars (seasonally adjusted annual rate).\footnote{\cite{GDPPOT}}  We use the CPI as our measure of inflation as it is the only inflation rate that the Federal Reserve has a publicly known rate goal for.  Table 1 presents summary statistics for our relevant variables.\footnote{The change in inflation (in percentage points) is calculated as the difference in four-quarter inflation from the first quarter to the last quarter
+of the sample. End-of-sample inflation is average inflation over the final four quarters of the sample. Inflation is measured as the four-quarter change in CPI, and the interest rate is the federal funds rate.}
+
+\begin{table}[H]
+\caption{Summary Statistics: Interest Rates and Inflation}
+\begin{tabular}{cccc}
+                   & Long Sample & Greenspan & Bernanke     \\
+                   & (1987.Q3---2014.Q1) & (1987.Q3--2006.Q1) & (2006.Q2--2014.Q1)    \\\midrule
+Average real interest rate (\%)   & -0.79 & 0.15 & -3.10\\
+Change in inflation  (\%)   &  -0.031  & -0.0092  & -0.087\\
+Average inflation (\%) & 0.72 &0.98 &0.075\\
+End-of-sample inflation (\%)  & -1.11 &1.49 &-1.11\\ \midrule \bottomrule
+\end{tabular}
+\end{table}
+
+Equation 1 states the Taylor rule as outlined by \cite{taylor1993discretion}, where $a_{\pi }=a_{y} =\frac{1}{2}$, $r_{t}^{*}=2$.  $i_{t}$ is the nominal interest rate, $r_{t}^{*}$ the equilibrium rate of real interest, $(\pi _{t}-\pi _{t}^{*})$ deviation in inflation from the target rate, $(y_{t}-{\bar  y}_{t})$ difference in output from potential output.  Figure 1 shows the observed Federal Funds rate as compared to the interest rate prescribed by the above Taylor rule.  The similarity in the time series has been documented by macroeconomic literature in the past.\begin{equation}
+i_{t}= \pi _{t} + r_{t}^{*} + a_{\pi }(\pi _{t} - \pi _{t}^{*})  + a_{y}(y_{t}-{\bar  y}_{t})  
+\end{equation}
 \begin{figure}[H]
-  \centering
-  \caption{Income by group comparisons and year observed.}
-  \includegraphics[width=6.5in]{Graph20.pdf}
+\centering 
+\caption{Nominal Interest Rate, Observed and Taylor Rule Prescribed}
+\includegraphics[scale=0.75]{Taylor_i}
 \end{figure}
 
-Figure 1 shows average family income among the comparisons groups each year 1977--2014.  The income measure is a long-run income measure described in section 3.1.  The immobile group, where household heads live in the same area they grew up in, have an income persistently lower than the mobile group, but the differences are not pronounced.  On the other hand, households with a black head have significant and persistent lower average income than those with white heads.  As such, the comparisons for mobility are devised to be comparisons first between groups with no significant difference in average income (mobile vs immobile), then a comparison for groups with a significant difference in average income (black vs white).
-
-\subsection{Intergenerational Income Elasticity (IGE)}
-
-The IGE is the most commonly used measure for intergenerational income mobility, and is defined as follows.
-
-Let $Y$ and $X$ be the log function for measures of long run income for children and parents respectively.\footnote{Only counting positive, non-zero incomes for continuity.}  Then the IGE is defined as the coefficient $\beta$ to be estimated in the least squares regression model (1), where $\alpha$ denotes a constant term and $\varepsilon$ the error term.
+\subsection{Econometric Specification}
 \begin{equation}
-Y=\alpha + \beta X + \varepsilon
+i_{t}-\pi _{t}=r_{t}^{*}+a_{\pi }(\pi _{t}-\pi _{t}^{*})+a_{y}(y_{t}-{\bar  y}_{t})+\varepsilon_t 
 \end{equation}
-Let $\sigma_Y$ and $\sigma_X$ be the respective standard deviations for $Y$ and $X$, so that the IGE is given in equation (2).
+A simple Taylor Rule is specified in equation 2, where $i_{t}-\pi _{t}$ is the real interest rate, $r_{t}^{*}$ the equilibrium rate of real interest (here a constant term to be estimated), $(\pi _{t}-\pi _{t}^{*})$ deviation in inflation from the target rate,\footnote{The Federal Reserve has an official target rate of 2\% CPI, and we use this as our target.} $(y_{t}-{\bar  y}_{t})$ difference in output from potential output.  $a_{\pi }$, $a_{y}$ are parameters we estimate, and $\varepsilon_t$ is a regular error term distributed $N(0,\sigma^2)$.
+
+
+The simple Taylor rule regression results are not reliable if any specific variables have order of integration not equal to zero -- we specifically look at the case that the real interest rate and output gap have order of integration of one.  It is not a common result finding the output gap has order of integration equal to one.\footnote{Although the interest rate, output gap, and inflation rate are highly persistent, we do not claim that they are non-stationary in general.  See \cite{rudebusch1993uncertain} for a discussion of this topic and \cite{osterholm2005taylor} for a full analysis of the Taylor Rule spurious regression problem - for which our methods are consistent with.}  Our sample sizes do not span all of the available data sample, instead are shorter subsamples corresponding to tenures of Federal Reserve Chairmen.  It follows that while stationarity may hold over the entire sample, it may not hold over our smaller subsamples, and we present results to justify these methods in Section 4.
+
+When the above restrictions apply, the Granger Representation Theorem, as presented by \cite{engle1987co}, may be applied to our subsamples.  We allow for such interest rate smoothing by estimating the Taylor rule in the context of an error correction model.  This approach allows for the possibility that the funds rate adjusts gradually to achieve the rate recommended by a Taylor rule (Judd \& Rudebusch 1998\nocite{judd1998taylor}).
+\begin{equation} i_t^* = \pi_t + r_t^* + \lambda_1 (\pi_t –- \pi^*) + \lambda_2(y_{t}-{\bar  y}_{t}) + \lambda_3(y_{t-1}-{\bar  y}_{t-1})+\varepsilon_t
+\end{equation}
+Equation 3 is similar to equation 2, but instead considers $i_t^*$, the  recommended nominal interest rate achieved by gradual adjustment (and not a direct Taylor rule), with a lagged output gap term.  This specification allows for multiple monetary policy targets, such as responding to only inflation, a nominal GDP growth target, inflation and output gap with varying or equal weights (as outlined by Judd \& Rudebusch 1998\nocite{judd1998taylor}).
+
+Dynamics of adjustment of the actual level of the funds rate to $i_t^*$ are: 
 \begin{equation}
-\beta = \frac{\textnormal{Cov} [Y, X]}{\sigma_Y \sigma_X}
+\Delta i_t = \gamma(i_t^* –- i_{t-–1}) + \rho\Delta i_{t-1}
 \end{equation}
-$\beta$ is interpreted as a measure of intergenerational income mobility as estimating $\beta=1$ implies that the income of children is perfectly associated with income of their parents, and so perfect immobility.  Conversely, estimating $\beta=0$ implies that there is no predictive relationship between income of children and parents, and so perfect mobility.  \cite{black2010recent} note how the IGE depends on the marginal distributions of income for both children and parents as well as the joint distribution between them.\footnote{This point is expanded on in section 3.2.}  The exact regression model can be adjusted for purpose, such as including interaction terms for relevant dummy variables or a function of controls, without compromising interpretation of the IGE estimated coefficient.
-
-I estimate the last squares model (1) in multiple ways, separately for children born in 1950--1959, 1960--1969, 1970--1979 and 1980--1989.  The income measure for children is income for their family unit averaged between ages 28--30 in 2012 dollars by the CPI-U, and for parents family income averaged over the years where their children are 15--17.\footnote{The parent family income is averaged between family income of the child's father and mother.  For the vast majority of children, mother and father live in the same household and thus have the same family income, so that the average is equal to either parent's income in the majority and averaged across both parent's income when they are not.  When only one parent's income is available, it is taken as that parents income.}  Negative and zero incomes are excluded, as are incomes above \$10,000,000.\footnote{The PSID recommends that extreme outliers are excluded in this manner.}  These conditions for inflation adjustment and excluding outliers are used throughout section 3. 
-
-First I apply ordinary least squares to the model for a standard IGE.  Secondly, I estimate various quantile regressions for estimates of the IGE by different quantiles.  Thirdly, I take an interaction-based approach to estimate the IGE by race and geographic mobility.  I estimated the same model, with dummy variables interacted with parental income in order to show estimated IGE for household with a head-of-household who is black, and separately I estimate the same model with dummy variable with interactions for the head of household the children live in resides in the same state they grew up in (for years income taken).  It follows that the IGE can be compared by the above manners across the income distribution, for black headed and the white headed families, and for households headed by people who live in the same state they grew up in to compare for geographic mobility.
-
-Next, I use the \cite{lee2009trends} approach to show trends in the IGE observed for 1977--2014, in regression model (3).  This model uses every year of income reported in the PSID to more efficiently use available observations, while controlling for age of the children for each income observation.
-\begin{multline}
-Y_{ict}=\alpha'D_t
-+ \beta_t X_{ic} 
-+ \gamma_1 A_{ic}  
-+ \gamma_2 A_{ic}^2
-+ \gamma_3 A_{ic}^3 
-+ \gamma_4 A_{ic}^4
-+ \delta_1 (t-c-40)
-+ \delta_2 (t-c-40)^2
-+ \delta_3 (t-c-40)^3  \\  
-+ \delta_4 (t-c-40)^4
-+ \theta_1 X_{ic} (t-c-40)
-+ \theta_2 X_{ic} (t-c-40)^2
-+ \theta_3 X_{ic} (t-c-40)^3
-+ \theta_4 X_{ic} (t-c-40)^4
-+ \varepsilon_{ict}
-\end{multline} 
-Here, $Y_{ict}$ denotes the log function of children family income observation $i$, observed in year $t$, part of cohort (i.e. born in year) $c$.  $\alpha_t$ is the fixed effect for each year, combined with $D_t$ vector with dummy variable for year $t$.  $X_{ic}$ is the log function of family income for the children's parents\footnote{Matched as before, described in footnote 7.} averaged over the years when the children were 15--17; $A_{ic}$ is the age of the parent's head of household when parental income is observed;  $(t-c-40)$ is the age of the child (when the children income is observed) minus 40.  So that the regression controls for a quartic in parental age, in child’s age, and interactions of the child’s age quartic with parental income.  Children income observation are considered in a pass through approach where children those age 25 are considered in the 1977 (cohort 1952) regression, those aged between 25 and 26 in 1978  (cohorts 1952, 1951), and continued for those aged between 25 and 62 (cohorts 1951--1989) in 2014.\footnote{\cite{lee2009trends} present the full reasoning for the to time trends in the IGE.}  The children age variable is normalized to equal 0 at age 40, in order to  simplify interpretation of the $\beta_t$ vector as the IGE at child’s age 40 evolves as cohorts pass through that age.\footnote{\cite{lee2009trends} reference \cite{Haider2007} and \cite{bohlmark2006life} in that errors-in-variables bias for left-hand side variable mismeasurement error is minimised if taken as measured at age 40.}$^,$\footnote{The choice to show trends in the IGE for an observed time trend as opposed to by trends by year of birth cohort is noted as an arbitrary choice by \cite{lee2009trends}.}  
-
-Ordinary least squares is applied to regression model (3) to show general trend in the IGE over 1977--2014.\footnote{Quantile regressions and interactions are non-stable for trends using the PISD, can bee seen in the Appendix.}  I use robust standard errors clustered around individuals -- as by \cite{lee2009trends}  -- in order to control for heteroskedacity and observations of repeated individuals/families between time periods.
-
-\subsection{Intergenerational Rank Association (IRA)}
-The IRA is an updated regression-based version of measure intergenerational mobility, and is defined as follows.
-
-The income for children and parents are ranked relative to to their respective others in the distribution.  Let $U$ and $V$ be the resulting distribution of ranks for children and parents.  Then the rank-rank association is defined as the coefficient $\rho$ in the least squares model (4), where $\eta$ denotes the constant term to be estimated and $\varepsilon$ the error term.
-
+In this Error-Correction Representation (equation 4) a change in interest rate depends on difference between recommended rate and previous period interest rate according to parameter $\gamma$, and momentum in interest rate change from previous time period according to parameter $\rho$. 
 \begin{equation}
-U=\eta + \rho V + \varepsilon
+\Delta i_t = \gamma\alpha - \gamma i_{t-1} + \gamma(1+\lambda_1)(\pi_t-\pi^*) + \gamma\lambda_2(y_{t}-{\bar  y}_{t})+\gamma\lambda_3(y_{t-1}-{\bar  y}_{t-1})+ \rho\Delta i_{t-1}
 \end{equation}
-
-$\rho$ is to be interpreted in a similar way to the IGE for intergenerational mobility, but for a predictive nature between the relative rank of the parents in the income distribution for the rank of their children.  \cite{dahl2008association} first used the IRA to build on earlier work that mainly used the IGE, showing that the IRA is shows less bias (or variation) in estimates according to age at which income is measured, for either children or parents, than the IGE.  \cite{chetty2014land} build on this work further by demonstrating how the IRA only depends on the joint distribution of income for parents and children, and is thus a better measure of mobility.\footnote{In contrast, the IGE depends on both marginal distributions of income for parents and children, as well as the joint distribution.  It follows that trends over time in the IGE contend with differences in the marginal distributions as compare to each other, such as a rise in variance in income (say, for growing income inequality) for the children's distribution, but not for the parents' (measured a number of years earlier) compared to previous estimates.  So that estimates in the IGE have questions regarding their comparability across different time periods.}
-
-I estimate the last squares model (1) in multiple ways, separately for children born in 1950--1959, 1960--1969, 1970--1979 and 1980--1989.  First I apply ordinary least squares to the model for a standard IRA estimate.  Secondly, I estimate various quantile regressions for estimates of the IRA by different quantiles.  Thirdly, I take an interaction-based approach to estimate the IGE by race and geographic mobility.  These methods are directly comparable to the those in section 3.1, adjusted to estimate the IRA.  Children's income at ages 28--30 is ranked relative to others in the same birth cohort, while their parent's income for the year's when their children are 15--17 is also ranked relative to others in the same birth cohort (for their children).  As by \cite{chetty2014united}, I divide parent income ranks into 50 to reduce noise.
-
-Next, I adjust the approach in section 3.1, and by \cite{lee2009trends}, to show time trends in the IRA, in regression model (5).  Once again, this approach uses the available data in the PSID more efficiently, while also controlling for age in years income rank is observed.
-
-\begin{multline}
-U_{ict}=\eta'D_t
-+ \rho_t V_{ic} 
-+ \gamma_1 A_{ic}  
-+ \gamma_2 A_{ic}^2
-+ \gamma_3 A_{ic}^3 
-+ \gamma_4 A_{ic}^4
-+ \delta_1 (t-c-40)
-+ \delta_2 (t-c-40)^2
-+ \delta_3 (t-c-40)^3  \\  
-+ \delta_4 (t-c-40)^4
-+ \theta_1 V_{ic} (t-c-40)
-+ \theta_2 V_{ic} (t-c-40)^2
-+ \theta_3 V_{ic} (t-c-40)^3
-+ \theta_4 V_{ic} (t-c-40)^4
-+ \varepsilon_{ict}
-\end{multline} 
-
-Here, $U_{ict}$ denotes the rank of children family income observation $i$, observed in year $t$, part of cohort (i.e. born in year) $c$.  $\eta_t$ is the fixed effect for each year, combined with $D_t$ vector with dummy variable for year $t$.  $V_{ic}$ is the rank of family income for the children's parents averaged over the years when the children were 15--17; $A_{ic}$ is the age of the parent's head of household when parental income is observed;  $(t-c-40)$ is the age of the child (when the children income is observed) minus 40.  
-
-The children ranks are constructed by order income for each (available) year of birth separately, including every year of income observed.  The parent ranks are also constructed according to the year of birth of their children, and (as described) instead include a long-run measure for income.  The same passing through sample restriction applies as in section 3.1, as does interpretation of the $\rho_t$ vector as IRA at child's age of 40 changes as subsequent cohorts pass through that age.  Ordinary least squares is applied to regression model (5).\footnote{Quantile regressions and interactions are non-stable for trends using the PISD, can bee seen in the Appendix.}
+By substituting the previous equations, we obtain the equation
+to be estimated in equation 5, where $\alpha= r^* - \lambda_1\pi^*$.  We cannot estimate both the equilibrium real interest rate and the inflation target simultaneously, and as such we use the official CPI target rate.  
 
 % RESULTS
 \section{Results}
-Results for this study are presented in sections 4.1 and 4.2 as graphical representations of the relevant estimated coefficients for ease of comparison, see Appendix I for presented tables with summary statistics. 
-
-\subsection{Intergenerational Income Elasticity (IGE)}
-\begin{figure}[H]
-  \centering
-  \caption{IGE Estimates by Decade of Birth}
-  \includegraphics[width=4in]{Graph1.pdf}
-\end{figure}
-Figure 2 shows my general estimates of the IGE for cohorts born in four sequential decades, with error bars representing the 95\% confidence intervals.  The results are grouped around 0.4, and none statistically significantly different from each other at any reasonable level of confidence (by Wald test analysis).  IGE estimates of around 0.4\footnote{Or slightly above within the given confidence intervals.} are consistent with the vast majority of studies that predict the IGE with long-run measures of income both children and their parents, including by \cite{solon1999intergenerational} measuring the IGE for the US in the 1990s.  The confidence intervals also by majority contain higher static predictions of the IGE, which range between 0.4 and 0.5 by \cite{solon1992intergenerational} and \cite{zimmerman1992regression}.  Children born in the 1970s have a predicted IGE of 0.33, lower than the IGE estimated IGE for the other three decades of birth, which are practically equal at 0.4.  These results imply that the IGE has no statistically significant differences when compared across people born across these four decades.
-\begin{figure}
-  \centering
-  \caption{IGE Estimates by Quantile Regression and Decade of Birth}
-  \includegraphics[width=4in]{Graph22.pdf}
-\end{figure}
-
-Figure 3 show my estimates for the IGE in the same manner as Figure 2, but compared for nine sequential quantile regressions (as labelled).  Children born in the 1950s see the largest differences in the IGE by quantile, with quantiles 0.1 and 0.2 exhibiting significantly higher estimates in the IGE than any other quantile, 0.59 for quantile 0.1 and 0.47 for quantile 0.2.  Quantiles 0.5 through 0.9 exhibit an estimated IGE lower than that for the ordinary least squares estimate.  This would imply that the bottom of the income distribution experiences lower mobility than the rest of the income distribution (by this measure) and higher mobility for those further up the income distribution, but the same results do not hold for all the other decades of birth.
-
-Children born in the 1960s see a higher IGE estimate for the 0.1 quantile of 0.5, but this result is not significantly different from estimates for quantiles 0.2 through 0.5.  The top 5 quantiles exhibit largely similar estimates of the IGE, slightly lower than 0.4.  Children born in 1970s again have the highest IGE estimate for the 0.1 quantile of 0.47, not as high as estimated for the 1950s.  The next quantiles show a ``u-shape" in the IGE, where the lowest estimates are for the middle quantile 0.5 of 0.27.  Lastly, children born in the 1980s show no significant differences in the IGE for any quantile, showing an estimated IGE of around the same ordinary least squares estimate for all quantiles.\footnote{As mentioned in section 5, the regressions for the 1980s have the lowest number of observations, making for results greater confidence intervals and more problems in comparison than the other decades.}
-
-\begin{figure}
+\subsection{Chairman Greenspan, 1987.Q3-–2006.Q1}
+\begin{table}[H]
 \centering
-\begin{minipage}{.47\textwidth}
-  \centering
-  \caption{IGE Estimates by Interaction Terms for Race.}
-  \includegraphics[width=\textwidth]{Graph3.pdf}
-  \end{minipage}
-\begin{minipage}{.47\textwidth}
-  \centering
-  \caption{IGE Estimates by Interaction Terms for Geographic Mobility.}
-  \includegraphics[width=\textwidth]{Graph4.pdf}
-  \end{minipage}
-\end{figure}
-Figure 4 shows estimated IGE for households with white heads compared to households with black heads, by interaction with the relevant dummy variable.  Children in households with a black head have estimates of the IGE higher than those in households with white heads for those born in the 1950s, 1960s and 1980s.  They exhibit a much lower IGE in the 1970s,\footnote{The decade of birth 1970s is noted as having the lowest number of black individuals surveyed by the PSID in all comparing decades.} where the 95\% confidence interval is below 0 (not shown in Figure 3).  However, none of these differences are significant by Wald test comparisons. 
+\caption{Estimated Coefficients Under Assumption of Simple Taylor Rule}
+\begin{tabular}{ccc|c}
+$r_{t}^{*}$ & $a_{\pi }$ & $a_{y}$ & ${\bar R}^2$\\
+\toprule
+.34 & 0.38& 0.58***& 0.19\\
+(0.36) & (0.23)& (0.17)  \\
+\midrule
+\bottomrule
+\end{tabular}
+\end{table}
+Table 2 shows the results of OLS regression for an unadjusted Taylor Rule.  \cite{taylor1993discretion} famously suggested a rule of the form $a_{\pi }=a_{y}=\frac{1}{2}$, while this regression finds only the coefficient for an output gap significant, with a low explanatory value ($R^2$ of 0.17).  Augmented Dickey-Fuller test results on both output gap and real interest rate find presence of unit root, and so the variables are cointegrated.\footnote{ADF test statistics are -1.40 and -1.42 for real interest rate and output gap respectively over the restricted time period, indicating non-stationarity over this given time period and example.  It has already been mentioned that this result is not to be generalised to all output gap time series.} 
 
-Figure 5 shows results for a very similar interaction based approach to Figure 3, but instead comparing children part of households when the head grew up in the same state and region in which they now live (immobile) and children who are part of households where the head lives in a separate region and state (mobile).  None of the results are significantly different between the groups, with estimates around 0.4, though children in the 1980s part of an immobile households exhibit an IGE of 0.45, 0.13 points higher than their mobile counterparts.  Figures 3 and 4 exhibits the unfortunate inability of showing intergenerational mobility by the traditional IGE regression based measured – as discussed in section 5.
-
-\begin{figure}
-  \centering
-  \caption{Estimated IGE by Year.}
-  \includegraphics[width=6in]{Graph5.pdf}
-\end{figure}
-Figure 6 presents the consecutive results for IGE estimates in equation (3), with 95\% confidence intervals given by the dashed lines, for the years observed 1980--2014, extending the methods and results by \cite{lee2009trends} fourteen years.\footnote{Though the estimates are not split according to gender in my results.}  The results are normalised for an elasticity for 40 year olds in each year.   IGE estimates for 1977--1979 are not shown as they are not found to be statistically significantly different from zero for each of those years, as a result of the pass through process of sample selection where the earlier years uses small samples and so give less precise estimates than do the following years.  
-
-The year 1980 has an associated IGE estimate of 0.22, before rising in the next four years to 0.45 in 1984.  Such a drastic rise in the IGE is not to be expected over such a short time period, and is presumably a results of only younger cohorts being included for the consecutive years 1980--1983, as described by \cite{lee2009trends} for daughters in their specification.  After 1983, the IGE estimate stabilises around 0.47, before dropping to 0.41 in 1998.  Subsequently the IGE estimates rise to 0.54 in 2008, and stay about the same for an estimate of 0.52 in 2014.  The average of the 25 (statistically significant) yearly estimates\footnote{Where later years are double weighted for completeness.}  is 0.47, a fairly typical estimate relative to the relevant literature surveyed by \cite{solon1992intergenerational}, and where no (significant) yearly estimate beyond 1982 differs from by more than 0.1.
-
-Wald tests for equality and OLS regression for time over the years 1977--2000 find no significant decrease in mobility, so replicating the same result for \cite{lee2009trends}.  However, running an OLS regression for time 1980--2014 yields a positive coefficient of 0.004 (0.001), significant at the 1\% level.  The same test for 1984--2014 finds a coefficient of 0.002, significant only at the 10\% level of confidence.  These results would imply different conclusions about time trends in mobility by the IGE, which are addressed in section 5.  Lastly, quantile regressions and interaction based for this approach do not exhibit stability in estimates for the IGE, and are presented in Appendix II.
-
-\subsection{Intergenerational Rank Association (IRA)}
-\begin{figure}[H]
-  \centering
-  \caption{IRA Estimates by Decade of Birth}
-  \includegraphics[width=3in]{Graph9.pdf}
-\end{figure}
-Figure 7 presents IRA estimates by decade of birth, with error bars for the 95\% confidence intervals.  All estimates lie between 0.3 and 0.4, with the 1970s cohorts exhibiting the lowest IRA of 0.31 and the 1980s highest of 0.39.  None are significantly different from any of the others (by Wald test for equality).  The results are similar to estimates for the IGE, similar but around 0.01 to 0.05 points lower.  In this manner, the IGE and IRA comparisons are very similar to differences found by \cite{dahl2008association}.  The confidence intervals are each near 0.43, and bounded below by varying figures between 0.24 and 0.33.  These results imply no significant differences in mobility as measured by the IRA across these four decades of birth.  
-\begin{figure}[H]
-  \centering
-  \caption{Graphical Representation of the IRA.}
-  \includegraphics[width=4in]{Graph16.pdf}
-\end{figure}
-
-These results find IRA estimates higher than more precise year on year estimates in administrative data by \cite{chetty2014united}, where commonly the IRA is estimated between 0.3 and 0.4, while not not declining with time.  I present a graphical representation of the IRA in Figure 8 by decade of birth, where each binned rank from 1--50 for children is plotted against the mean rank for parents associated.  The gradient of the lines of best fit show give a visual representation of the IRA, here between 0.3 and 0.35.  This plot shows more variation than that the analogous scatter plot by \cite{chetty2014united}, as is to be expected comparing research using small samples in survey data and ones that use much larger administrative data.\footnote{See Section 5 for a discussion of this issue.}
-
-\begin{figure}
-  \centering
-  \caption{IRA Estimates by Quantile Regression and Decade of Birth.}
-  \includegraphics[width=4in]{Graph22.pdf}
-\end{figure}
-Figure 9 shows estimates for the IRA across quantile regressions 0.1 to 0.9 for four decades of birth.  All cohorts see a similar pattern in the IRA across quintiles, lower IRA estimates at the extreme ends of the rank distributions than for the middle.  Persistently the 0.9 quantile has the lowest estimate for the IRA, ranging from 0.16 for children born in the 1970s to 0.22 for children born in the 1980s.  Also persistently the 0.4 quantile regression produces relatively high estimates (0.5 median for the 1960s cohorts), ranging from 0.44 for 1950s cohorts to 0.55 for 1980s cohorts.  Children born in the 1950s see the most similarity in IRA estimates across quantiles, as do similarly 1970s cohort.  1960s and 1980s cohorts exhibit the strongest pattern of lower IRA estimates for extremes.  Wald test analysis finds the 0.9 quantile estimates significantly lower than all other estimates, except for the 0.1 estimate for 1980s cohorts.  These results broadly imply that those in the middle of the income distribution experiences lower rates of mobility, as measured by the IRA, than do children at the top or bottom of the income distribution.  However, these results are not uniformly significant across the four decades of cohorts, and have some conceptual issues discussed in section 5.
-\begin{figure}
+Table 3 presents the results of an adjusted Taylor rule for discretion over gradual change in interest rates and time series context.\footnote{Standard Errors are presented in brackets beneath estimated coefficients, and $^*$ $^*$ $^*$ designates significance at the 1\% level, $^*$$^*$ the 5\% level, and $^*$ the 10\% level.}  Regression A finds the lagged output gap as insignificant so that it is excluded in regression B.  Regression B explains 54 percent of the variation in interest rates over this time period (with an adjusted $R^2$ of 0.51), and is presented in full construction in equation 6.\footnote{It should be stressed that the coefficients represent the Federal Reserve's reaction to economic situations, and the coefficients in equation 6 are constructed from these reactions.}
+\begin{table}[H]
 \centering
-\begin{minipage}{.47\textwidth}
-  \centering
-  \caption{IRA Estimates by Interaction Terms for Race.}
-  \includegraphics[width=\textwidth]{Graph11.pdf}
-  \end{minipage}
-\begin{minipage}{.47\textwidth}
-  \centering
-  \caption{IRA Estimates by Interaction Terms for Geographic Mobility.}
-  \includegraphics[width=\textwidth]{Graph12.pdf}
-  \end{minipage}
-\end{figure}
+\caption{Estimated Coefficients Under Adjusted Taylor Function, Equation B Omits Insignificant Output Gap Lag}
+\begin{tabular}{ccccccc|ccc}
+&$\alpha$ & $\gamma$ & $\lambda_1$ & $\lambda_2$& $\lambda_3$&$\rho $&${\bar R}^2$ \\
+\toprule
+A:&4.51***& 0.10*** & 0.35** & 1.80** &-0.51 & 0.45*** & 0.50 \\
+&(0.13)&(0.028)&(0.061)&(0.090)&(0.090)&(0.098)&\\
+\midrule
+B:&4.60***&0.11***&0.28**&1.29***&&0.45***& 0.51 \\
+& (0.12) &(0.027)&(0.060) &(0.038) &&(0.097) \\
+\midrule
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{equation}
+\Delta i_t = 0.49^{***} +0.11^{***} i_{t-1} + 0.14^{**}(\pi_t-\pi^*) + 0.14^{***}(y_{t}-{\bar  y}_{t})+ 0.45^{***} \Delta i_{t-1} +\varepsilon_t 
+\end{equation}
+This specification shows for discretionary interest rate change according to gradual adjustment of the funds rate to a Taylor rule (as opposed to instantaneous change according to economic situations) with a highly significant value for momentum in interest rate change.  Each quarter, the interest rate adjusts enough to eliminate 11 percent of the difference between the lagged and optimal rate. Lastly, the estimated weight for output gap of 1.29 is much higher than the rate of 0.50 that Taylor originally prescribed.
 
-Figures 10 and 11 show similar results from interaction based regression for the IGE comparing households with black heads vs white heads, and headed by people who lives in the same state and region they grew up in (immobile) vs heads who now live in different states and regions (mobile).  Once again the approaches find no statistically significant differences for any of the estimates terms, and again show limitations of the regression based approach to be discussed in section 5.
-\begin{figure}[H]
-  \centering
-  \caption{Estimated IRA by Year.}
-  \includegraphics[width=6in]{Graph13.pdf}
-\end{figure}
+\subsection{Chairman Bernanke 2006.Q2--2014.Q1}
+\begin{table}[H]
+\centering
+\caption{Estimated Coefficients Under Assumption of Simple Taylor Rule}
+\begin{tabular}{ccc|ccc}
+$r_{t}^{*}$ & $a_{\pi }$ & $a_{y}$ & ${\bar R}^2$\\
+\toprule
+0.023&-2.46*** &1.00***& 0.87\\
+(0.46)& (0.185) & (0.13) \\
+\midrule
+\bottomrule
+\end{tabular}
+\end{table}
+Table 2 shows the results of OLS regression for an unadjusted Taylor Rule. This regression finds the coefficients for both inflation deviation and output gap significant, with an extremely high explanatory value ($R^2$ of 0.87).  Surprisingly the coefficient for reaction to inflation deviation is large (much greater than 1 in magnitude) and negative, which is a very counter-intuitive result in the context of a monetary policy reaction function.  Once again, Augmented Dickey-Fuller test results on both output gap and real interest rate find presence of unit root, indicating a spurious regression, and so the variables are cointegrated.\footnote{ADF test statistics are -2.38 and -1.51 for real interest rate and output gap respectively over the restricted time period indicating non-stationarity over this given time period and example.  Once again the previous comments against generalisation of this result hold.} 
 
-Figure 12 presents the estimated IRA coefficient in equation (7) with 95\% confidence intervals represented by the dotted lines, adjusting the methods by \cite{lee2009trends} to the IRA measure of intergenerational income mobility and again a further 14 years.  The results are normalised for a rank association regarding ranks for children at the age of 40 in each year.   IRA estimates for 1977--1979 are not displayed as they are not found to be statistically significantly different from zero for each of those years, as a result of the pass through process of sample selection where the earlier years give less precise estimates due to smaller sample sizes than do the following years.  
-
-The observed IRA for 1980 is 0.18, and this figure swiftly rises to 0.26 in 1982, again as a results of specification and not expected trends.  The estimated IRA is stable for all the years 1982 and afterwards.  There is a general trend upwards in the IRA over 1982--1993 finishing at 0.35, before declining until 2002 finishing at 0.27 in 2002.  The final few years exhibit a slow increase to the highest estimated IRA (by these methods) of 0.37 for 2014.  The average of the 25 (statistically significant) yearly estimates\footnote{Where double weighting is used for the estimates of even years after 1996 for completeness.} is 0.32, an estimate similar those found by \cite{chetty2014united}, and where no yearly estimate beyond 1981 differs by more than 0.1.
-
-Wald tests for equality and OLS regression for time over the years 1977--2000 find no significant decrease in mobility, so replicating the same result of \cite{lee2009trends} with a similarly specified rank-rank measure for intergenerational mobility.  However, running an OLS regression for the years 1980--2014 yields a positive coefficient of 0.003 (0.0007), significant at the 1\% level of confidence.  The same test for 1982--2014 finds a coefficient of 0.002 (0.0005), also significant at the 1\% level.  These results imply that intergenerational mobility – as measured by the IRA – has significantly decreased over the 34 years, disagreeing with findings by \cite{chetty2014united}.  Lastly, quantile regressions and interaction based regression for this approach do not exhibit stability in estimates for the IRA, and are presented in Appendix II.
-
+Table 5 presents the results of an adjusted Taylor rule for discretion over gradual change in interest rates and time series context.  Regression A finds the vast majority of regressors to be insignificant, regression B considers the same model respecification as section 4.1, and regression C considers the model which drops all insignificant regressors. Regression C explains 47 percent of the variation in interest rates over this time period (with an adjusted $R^2$ of 0.43), and is presented in full construction in equation 7.
+\begin{table}[H]
+\caption{Estimated Coefficients Under Adjusted Taylor Function}
+\centering
+\begin{tabular}{ccccccc|ccc}
+&$\alpha$ & $\gamma$ & $\lambda_1$ & $\lambda_2$& $\lambda_3$&$\rho $&${\bar R}^2$ \\
+\toprule
+A:&  1.85&0.063 &-1.59 & 2.46&-1.90 &0.40** & 0.34\\
+& (0.31)&(0.064)&(0.056)&(0.10)&(0.11)&(0.17)&\\ \midrule
+B:& 4.41 & 0.097*&-1.86 &1.14 & &0.46*** & 0.33\\
+& (0.28)&(0.057)&(0.054)&(0.067)& &(0.16)&\\ \midrule
+C:&&0.052**&&&&0.54***& 0.43 \\
+&  &(0.023)&&&&(0.14)& \\
+\midrule
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{equation}
+\Delta i_t = 0.52^{**} i_{t-1} + 0.54^{***} \Delta i_{t-1} +\varepsilon_t 
+\end{equation}
+The monetary policy reaction finds momentum in interest rate change highly significant.  Quaterly, the interest rate adjusts to eliminate five percent of the difference between the lagged and optimal rate -- an entire six percent lower than the change during Chairman Greenspan's tenure.  Most striking of the results of the reaction function are the insignificance of inflation deviation, output gap, and lagged output gap.  This result is very counterintuitive according previous literature for the Federal Reserve's reaction to current economic situations, not least the results presented by \cite{judd1998taylor} and the reaction function we estimated during the tenure of Chairman Greenspan.  This will be our main point of contention in the following discussion. 
 % DISCUSSION
 \section{Discussion}
-The analysis shows estimates for the intergenerational elasticity of income and rank-rank association as broadly similar for people born in the 1950s to the 1980s, people who enter the labour market mainly in the 1970s to 2000s.  Next, the regressions measures of intergenerational mobility are demonstrated as inconclusive for findings on mobility between groups by simple interactions-based regressions.  Quantile regressions are also shown as inconclusive in persistent differences by both measures of mobility across quantiles 0.1 to 0.9.  Lastly, the specification, originally presented by \cite{lee2009trends}, for time trends in regression based measures of intergenerational mobility finds a significant fall in mobility for 1980--2014.  
 
-\cite{lee2009trends} conclude that over 1977--2000 there has been no significant trend in the intergenerational income elasticity, while \cite{chetty2014united} conclude that the rank-rank association sees no general trend for cohorts born between 1971--1993.  My results do not corroborate these pieces of work, subject to some caveats.  The intergenerational income elasticity finds different levels of significance when the early estimates (around 1980) are included or not included in a standard OLS regression for time, so that if they are excluded a fall in mobility is not significant at the standard 5\% confidence level.  The intergenerational rank-rank association, on the other hand, sees a significant fall in mobility in both circumstances.  I conclude that there has been a fall in intergenerational mobility by these measures, with the same sentiment provided by \cite{lee2009trends}: ``[my] estimates are still too imprecise to rule out modest trends in either direction.''  So that the modest, yet imprecise decrease in mobility is noted as such.
+The reaction functions estimated in sections 4.1 and 4.2 are noticeably different.  This difference mainly stems from the result that during Chairman Bernanke's tenure the reaction function finds the majority of regressors  with error correction/gradual adjustment in the Taylor Rule we present.  The result would imply that the Federal Reserve adjusted monetary policy according to neither the output gap nor inflation deviation from target, and supports out hypothesis that the Taylor rule paradigm is not the most effective way to consider monetary policy in the US from 2007 to 2014.
 
-The intergenerational income elasticity and rank-rank association are consistently estimated in the PSID to be around 0.4 and 0.3 respectively, consistent with the relevant literature.  However, wildly variables results are found in comparing estimates across quantiles or across groups.  These are mainly found as the result of small sample size, especially in the case of blacks in the US.  A remarkably small number of black people fit the standard sample restrictions used in previous studies for estimating mobility with either regression-based measures, and the results are clear in their imprecision as a result.  This isn't a fringe issue on the study of intergenerational mobility: the PSID is noted as one of, if not the best, non-restricted source of longitudinal data individuals where children can be matched to their parents.\footnote{Only rivaled by the multiple iterations of the National Longitudinal Survey of Youth.}
+There are some key things to note about the time periods for the tenures of Chairmen Greenspan and Bernanke.  Firstly, Greenspan resided over the Federal Reserve when the concept of ``easy-money" in central banking was first coined.  It was the beginning of a systematic monetary policy switch from previously tight monetary policy, which combated primarily high inflation, to the Reserve being relied upon for economic stability, and so weighting output gap as relatively more important in monetary policy decisions.  This switch can be seen in the estimates for our reaction function for Chairman Greenspan's tenure compared to the same for Chairman Volcker tenure by \cite{judd1998taylor}, where a reaction function reveals a higher weighting by the Reserve to maintain low inflation for Volcker's tenure.
 
-It is specifically for the limitations of regression based approaches in survey data that \cite{bhattacharya2011nonparametric} developed robust non-parametric methods (here probabilities for transitional and directional mobility) to better examine differences in intergenerational mobility across race.  However, trends among these measures are still not measures using this survey data, as individual years or cohorts would have too few observations for minorities of interest for precise estimates.  Studies that use regression-based measures for intergenerational mobility consider showing complementary non-parametric methods, similar to how \cite{chetty2014united} show complementary trends in transition probabilities.  Their approach marks a big effort to decompose intergenerational mobility beyond its traditional focus of static estimates and trends, especially with the accompanying work on geographic differences in \cite{chetty2014land}.
+Chairman Greenspan's tenure is also documented as an era that monetary policy in the US was conducted very successfully: there were relatively few and short-lived recessions and there was longest recorded expansion in the history of the United States.  However, there are calls that the period of ``easy-money'' laid the seeds for the Great Recession in 2008.  During this time period there was a relatively low rate of variance in the output gap and inflation deviation (signaling a time period of economic stability), while no corresponding drop in variance of interest rate (signaling a higher level of discretion in monetary policy decisions).  It follows that a Taylor rule with error correction and discretion for gradual adjustment is a very effective way to consider monetary policy decision making at the Federal Reserve over the tenure of Chairman Greenspan.
 
-\cite{chetty2017fading} use a non-parametric method (similar to absolute directional mobility) in IRS administrative data to show a downward trend by successive birth cohorts, since the administrative data represents every person (subject to their sample restitutions) in the US so does not have the problem of insufficient sample sizes.  However, gaining access to robust administrative data requires extreme lengths for security clearance \footnote{This process was chronicled in Science magazine by \cite{jeffrey} to note how it extreme it was.}, as well as the issue of limited availability of any administrative data that even collects information on racial characteristics, or other sensitive/protective information, of individuals.  For these reasons we must note the importance of survey data in providing representative personal/protected data on individuals, in addition to its problems in sample sizing and inadequacies in measuring intergenerational mobility across groups.
+On the other hand, Chairman Bernanke's tenure was remarkably different regarding both economic conditions and the nature of central banking itself.  For one, the Great Recession, which began a few quarters after Bernanke took office, led to historically high rates of unemployment and alarmingly low levels of inflation.  Figure 1 shows that for multiple quarters between 2008 and 2014, a simple Taylor rule would have prescribed a negative nominal interest rate.  The observed interest rate for this time was instead just above zero, and was kept at this rate from the end of 2008 to the middle of 2015.  These things would suggest that the Federal Reserve ran in to the zero lower bound in setting interest rates, and so could not change interest rates any further to reflect currently dire economic situations.  Our results support this hypothesis by showing a reaction function that considers neither of the historically most important economic indicators in monetary policy decisions.  
 
-% Conclusion
+We can thus refute the standard Taylor rule and Taylor with discretion framework for effectively analysing monetary policy decisions at the Federal Reserve for Chairman Bernanke's tenure.  Since monetary policy decisions were constrained below by the zero lower bound, interest rate change could not have been decided by the standard Taylor rule approach of output gap and inflation deviation.  This time period may also be noted as one in which there were liquidity trap implications, so that changes in the nominal interest rate are expected to have lower than usual economic effects, as theoretically presented by \cite{krugman2000thinking}.  The Federal Reserve's actions in this time period reflected these considerations by embarking on central banking's most expansive policy advances in the form of quantitative easing and a sustained historically low interest rate.
+
+It follows that the Federal Reserve's monetary policy decisions were less of the traditional Taylor rule variety during Chairman Bernanke's tenure and more of the unconventional interventionist approach that has characterised the new era of central banking, and that is still in full force in Europe and Japan.  The last item we would like to mention in our discussion of a Taylor rule and a Taylor rule with discretion for gradual change are Mr Bernanke's own interactions with the Taylor Rule after he left office.\footnote{When he was no longer federally constrained on expressing his views on monetary policy.}  \cite{bernanke_2016} presents a critique of the Taylor rule in a blog post for his new academic home, concluding that the Taylor rule's lack of complexity is its strongest weakness.  This in direct disagreement to Taylor's (1983) conclusion that simplicity and lack of discretion leads to greater credibility in monetary policy.  The debate stemmed from a discussion at an International Monetary Fund event, where Bernanke's opinions on monetary policy according to a Taylor rule became apparent, and his opposition to the idea that monetary policy should be decided directly according to economic situations without discretion\footnote{Discretion which we find includes being above and beyond that for error correction in gradual adjustment.} was made very clear.
+
+% CONCLUSION
 \section{Conclusion}
-The analysis shows that estimates for intergenerational income mobility across the income distribution and across comparison groups by traditional regression-based measures are not so clear cut.  Positive time trends for both the intergenerational income elasticity and intergenerational rank-rank association are found over 1980--2014 -- with some noted statistical caveats -- expanding the methods of \cite{lee2009trends} over a further fourteen years and to regression-based rank-rank measures, as presented by \cite{chetty2014united}.
+The estimates in this paper indicate that a Taylor rule reaction function is an effective way to analyse monetary policy during Chairman Greenspan's tenure as Federal Reserve Chairman, and captures some key elements in monetary policy decision making during this time.  Our regressions imply that changes in the interest rate are consistent with a monetary policy regime that aimed for stable inflation around the target and to minimise the output gap.  The Reserve's reaction differs from Taylor's (1993) original specification, specifically by reacting more strongly to the output gap and adjusting interest rates gradually rather than instantly to a Taylor rule specification.  Our results are consistent with results presented by \cite{judd1998taylor} before the end of Chairman Greenspan's tenure.
 
-I discuss the limits on widely used regression-based measures of intergenerational mobility using the PISD and survey data in general.  This issues have ramifications regarding the emergence of research on intergenerational mobility that uses large scale administrative data, and are especially important for furthering the study of intergenerational mobility beyond static estimates that have traditionally been the full focus.  The future of research in intergenerational mobility is bright, and the dynamics between methods and studies that use different methods and approaches will play a major role in the advancement of the subject.  
+For Chairman Bernanke's tenure, we find that a Taylor rule reaction function is not an effective way to analyse monetary policy, and this reflects some key elements of the economic and monetary policy environment of that time period.  The reaction function did not find significant the key variables in a Taylor rule framework of deciding monetary policy.  We consider that the zero lower bound, Federal Reserve response by pursuing other areas of monetary policy, and Chairman Bernanke's tenure at the Reserve reflect this departure from precedence in monetary policy decision making.  These results break from the results of \cite{judd1998taylor} in regarding a Taylor rule for successive chairmen of the Federal Reserve.
 
+Lastly, as of May 2017, The US seems to be on a path out of a period of central banking intervention and liquidity trap monetary policy.  However, the economic recovery has not been so strong around the world, especially in Europe where this new era of liquidity trap has yet to show signs of ebbing.  It remains to be seen whether the recovery in the US will continue so strongly in spite of international headwinds, and whether the era of monetary policy at the zero lower bound may be left behind in favour of the more conventional Taylor rule approach.  So that it remains to be seen whether the Taylor rule and Taylor rule with discretion for gradual adjustment will in the future ever again be an effective method to analyse monetary policy decision at the Federal Reserve.
+\newpage
 \bibliographystyle{agsm}
 \bibliography{Bibliography}
 
-\section{Appendix I}
 
-\begin{table}[H]
-\centering
-\caption{IGE Estimates by Cohort Decade (see Figure 2).}
-\begin{tabular}{l|cccc}
-\midrule
-Decade of Birth & IGE, estimate &   Observations & \\
-\midrule
-1950--1989            & 0.40      (.035) & 5095  \\
-1960--1989            & 0.41      (.035) & 4010 \\
-1970--1989            & 0.33      (.043) & 1734 \\
-1980--1989            & 0.40      (.036) & 1752 \\
-\midrule \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{longtable}{lc|ccccc}
-\caption{IGE Estimates by Cohort Decade, according to quantile regression (see Figure 3).} \\ \midrule
-Decade of Birth & Quantile & IGE, estimate    & Observations  \\ \midrule
-1950--1959 & 0.1 & 0.59 (.038)  & 5095   \\
-& 0.2  & 0.47 (0.017) & 5095  \\
-& 0.3      & 0.38   (0.022)  & 5095  \\
-& 0.4   & 0.38 (0.021)  & 5095  \\
-& 0.5    & 0.34 (0.017)  & 5095  \\
-& 0.6   & 0.32 (0.018)  & 5095  \\
-& 0.7    & 0.32 (0.017)  & 5095  \\
-& 0.8    & 0.30 (0.018)  & 5095  \\
-& 0.9   & 0.30 (0.019)  & 5095   \\ \hline
-1960--1969 & 0.1  & 0.49 (0.056) & 4010 \\ 
-& 0.2 & 0.41 (0.034) & 4010  \\
-& 0.3 & 0.41 (0.024) & 4010  \\
-& 0.4 & 0.41 (0.024) & 4010  \\
-& 0.5 & 0.39 (0.022) & 4010  \\
-& 0.6 & 0.37 (0.020) & 4010  \\
-& 0.7 & 0.35 (0.023)   & 4010  \\
-& 0.8 & 0.35 (0.018) & 4010  \\
-& 0.9 & 0.36 (0.024) & 4010 \\ \hline
-1970--1979 & 0.1& 0.47 (0.053) & 1734 &  \\ 
-& 0.2&0.39 (0.037) & 1734 &  \\
-& 0.3&0.33 (0.032) & 1734 &  \\
-& 0.4&0.27 (0.027) & 1734 &  \\
-& 0.5&0.27 (0.024) & 1734 &  \\
-& 0.6&0.31 (0.024) & 1734 &  \\
-& 0.7&0.36 (0.032) & 1734 &  \\
-& 0.8&0.34 (0.027) & 1734 &  \\
-& 0.9&0.34 (0.038) & 1734 & \\ \hline
-1980--1989 & 0.1 & 0.43 (0.066)   & 1752  \\
-& 0.2& 0.40  (0.049) & 1752  \\
-& 0.3 &0.40 (0.044) & 1752  \\
-& 0.4 &0.41 (0.034) & 1752  \\
-& 0.5 &0.37 (0.034) & 1752  \\
-& 0.6 &0.37  (0.033) & 1752  \\
-& 0.7 &0.35 (0.026) & 1752  \\
-& 0.8 &0.36  (0.025) & 1752  \\
-& 0.9 &0.41  (0.042) & 1752 \\
-\midrule \bottomrule
-\end{longtable}
-
-\begin{table}[H]
-\centering
-\caption{IGE Estimates by Cohort Decade, and Race (see Figure 4).}
-\begin{tabular}{lc|cccc}
-\midrule
-Decade of Birth & Race & IGE, estimate         & Observations & \\
-\midrule
-1950--1989  & White & 0.34 (0.041)  &4930  \\
-& Black  &   0.38 (0.15) & 4930\\ \hline
-1960--1969  & White & 0.36 (0.038) &3864   \\
-& Black    & 0.47 (0.14) & 3864\\ \hline
-1970--1979  & White & 0.33 (0.046) &1671 \\
-& Black  &  0.10 (0.19) & 1671 \\ \hline
-1980--1989  & White &  0.38 (0.042) & 1618  \\
-& Black  &  0.58 (0.15) & 1618 \\ 
-\midrule \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[H]
-\centering
-\caption{IGE Estimates by Cohort Decade, and Geographic Mobility (see Figure 5).}
-\begin{tabular}{lc|cccc}
-\midrule
-Decade of Birth & Race & IGE, estimate          & Observations & \\
-\midrule
-1950--1989  & Mobile & 0.37 (0.056)  &5095  \\
-& Immobile  &   0.40  (0.13)  & 5095\\ \hline
-1960--1969  & Mobile & 0.43 (0.076) &4010   \\
-& Immobile    & 0.40 (0.16) & 4010\\ \hline
-1970--1979  & Mobile  &  0.35  (0.057)&1734 \\
-& Immobile  &  0.31 (0.13) & 1734 \\ \hline
-1980--1989  & Mobile  & 0.32 (0.057) & 1752 \\
-& Immobile  &  0.45 (0.13) & 1752 \\ 
-\midrule \bottomrule
-\end{tabular}
-\end{table}
-
-
-\begin{longtable}{l|cccccc}
-\caption{IGE Estimates by Year Income Observed, for Time Trends (see Figure 6).} \\ \midrule
-Year & IGE, estimate          & Observations & \\
-\midrule
-1977 & 0.49 (0.12) & 17   \\
-1978 & 0.25 (0.089) & 114  \\
-1979 & 0.15 (0.091) & 266  \\
-1980 & 0.22 (0.067) & 406  \\
-1981 & 0.31 (0.0620 & 550  \\
-1982 & 0.36 (0.010) & 675  \\
-1983 & 0.36 (0.069) & 808  \\
-1984 & 0.45 (0.062) & 933  \\
-1985 & 0.46 (0.079) & 1074 \\
-1986 & 0.46 (0.052) & 1203 \\
- 1987 & 0.47  (0.055) & 1335 \\
- 1988 & 0.48 (0.061) & 1426 \\
- 1989 & 0.49 (0.056) & 1538 \\
- 1990 & 0.48 (0.055) & 1667 \\
- 1991 & 0.49 (0.041) & 1749 \\
-1992 & 0.49 (0.054) & 1819 \\
-1993 & 0.49 (0.037) & 1875 \\
-1994 & 0.49 (0.037) & 2020 \\
-1995 & 0.49 (0.039) & 2064 \\
-1996 & 0.46 (0.049) & 1580 \\
-1998 & 0.41 (0.038) & 1733 \\
-2000 & 0.44 (0.036) & 1865 \\
-2002 & 0.39 (0.036) & 1989 \\
-2004 & 0.45 (0.037) & 2185 \\
-2006 & 0.46 (0.037) & 2111 \\
-2008 & 0.54 (0.061) & 2087 \\
-2010 & 0.49 (0.040) & 2003 \\
-2012 & 0.52 (0.046) & 1915 \\
-2014 & 0.52 (0.049) & 1825 \\
-\midrule \bottomrule
-\end{longtable}
-
-\begin{table}[H]
-\centering
-\caption{IRA Estimates by Cohort Decade (see Figure 7).}
-\begin{tabular}{l|cccc}
-\midrule
-Decade of Birth & IRA, estimate          & Observations & \\
-\midrule
-1950 & 0.36 (.026) & 5094 &  \\
-1960 & 0.37 (.029) & 4009 &  \\
-1970 & 0.31  (.035) & 1732 &  \\
-1980 & 0.39 (.032) & 1752 &  \\
-\midrule \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{longtable}{lc|ccccc}
-\caption{IRA Estimates by Cohort Decade, according to quantile regression (see Figure 8).} \\ \midrule
-Decade of Birth & Quantile & IRA, estimate      &  Observations  \\ \midrule
-1950--1959 & 0.1 & 0.33  (0.025) & 5094 &  \\
-& 0.2 & 0.44  (0.021) & 5094 &  \\
-& 0.3 & 0.44  (0.027) & 5094 &  \\
-& 0.4 & 0.46  (0.024) & 5094 &  \\
-& 0.5 & 0.44  (0.022) & 5094 &  \\
-& 0.6 & 0.42  (0.022) & 5094 &  \\
-& 0.7 & 0.38  (0.022) & 5094 &  \\
-& 0.8 & 0.31  (0.017) & 5094 &  \\
-& 0.9 & 0.19  (0.014) & 5094 & \\ \hline
-1960--1969 & 0.1 & 0.31  (0.026) & 4009 &  \\
-& 0.2 & 0.35        (0.033) & 4009 &  \\
-& 0.3 & 0.44  (0.029) & 4009 &  \\
-& 0.4 & 0.50         (0.029) & 4009 &  \\
-& 0.5 & 0.52        (0.030) & 4009 &  \\
-& 0.6 & 0.48  (0.024) & 4009 &  \\
-& 0.7 & 0.42  (0.027) & 4009 &  \\
-& 0.8 & 0.33       (0.020) & 4009 &  \\
-& 0.9 & 0.19      (0.015) & 4009 & \\ \hline
-1970--1979 & 0.1 & 0.278  (0.037) & 1732 &  \\
-& 0.2 & 0.38       (0.044) & 1732 &  \\
-& 0.3 & 0.43  (0.054) & 1732 &  \\
-& 0.4 & 0.39  (0.052) & 1732 &  \\
-& 0.5 & 0.38  (0.041) & 1732 &  \\
-& 0.6 & 0.42  (0.035) & 1732 &  \\
-& 0.7 & 0.38  (0.031) & 1732 &  \\
-& 0.8 & 0.27  (0.027) & 1732 &  \\
-& 0.9 & 0.16  (0.020) & 1732 & \\ \hline
-1980--1989 & 0.1 & 0.26  (0.025) & 1752 &  \\
-& 0.2 & 0.39  (0.041) & 1752 &  \\
-& 0.3 & 0.50         (0.048) & 1752 &  \\
-& 0.4 & 0.56  (0.043) & 1752 &  \\
-& 0.5 & 0.55  (0.047) & 1752 &  \\
-& 0.6 & 0.49  (0.045) & 1752 &  \\
-& 0.7 & 0.41  (0.034) & 1752 &  \\
-& 0.8 & 0.33  (0.028) & 1752 &  \\
-& 0.9 & .22  (0.037) & 1752 & \\
-\midrule \bottomrule
-\end{longtable}
-
-\begin{table}[H]
-\centering
-\caption{IRA Estimates by Cohort Decade, and Race (see Figure 9).}
-\begin{tabular}{lc|cccc}
-\midrule
-Decade of Birth & Race & IRA, estimate         & Observations & \\
-\midrule
-1950--1989  & White & 0.32 (0.30)  &4930  \\
-& Black  &   0.30 (0.14) & 4930\\ \hline
-1960--1969  & White & 0.30 (0.033) &3864   \\
-& Black    & 0.30 (0.11) & 3864\\ \hline
-1970--1979  & White  &  0.30 (0.38) &1671 \\
-& Black  &  0.15 (0.16) & 1671 \\ \hline
-1980--1989  & White  & 0.37 (0.037) & 1618  \\
-& Black  &  0.42 (0.14) & 1618 \\ 
-\midrule \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[H]
-\centering
-\caption{IRA Estimates by Cohort Decade, and Geographic Mobility (see Figure 10).}
-\begin{tabular}{lc|cccc}
-\midrule
-Decade of Birth & Race & IRA, estimate          & Observations & \\
-\midrule
-1950--1989  & Mobile & 0.37 (0.047)   &5095  \\
-& Immobile  &   0.35 (0.10)  & 5095\\ \hline
-1960--1969  & Mobile & 0.36 (0.056)  &4010   \\
-& Immobile    & 0.36 (0.12) & 4010\\ \hline
-1970--1979  & Mobile  &  0.29 (0.06) &1734 \\
-& Immobile  &  0.32 (0.13) & 1734 \\ \hline
-1980--1989  & Mobile  & 0.33 (0.051) & 1752 \\
-& Immobile  &  0.41 (0.11) & 1752 \\ 
-\midrule \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{longtable}{l|cccccc}
-\caption{IRA Estimates by Year Income Observed, for Time Trends (see Figure 11).} \\ \midrule
-Year & IGE, estimate          & Observations  \\ \midrule 
-1977 & 0.43 (.12) & 17   \\
-1978 & 0.21  (.080) & 114 \\
-1979 & 0.17  (.063) & 266  \\
-1980 & 0.18  (.053) & 406      \\
-1981 & 0.19  (.043) & 550     \\
-1982 & 0.26  (.040)   & 675     \\
-1983 & 0.27  (.039)  & 808     \\
-1984 & 0.29  (.035) & 933    \\
-1985 & 0.28  (.034) & 1074    \\
-1986 & 0.30  (.031) & 1203     \\
-1987 & 0.29  (.030) & 1335     \\
-1988 & 0.29  (.028) & 1426     \\
-1989  & 0.32  (.026)    &  1538  \\
-1990 & 0.31  (.026) & 1667     \\
-1991 & 0.34  (.0240) & 1749     \\
-1992 & 0.33  (.026) & 1819     \\
-1993 & 0.35  (.025) & 1875    \\
-1994 & 0.34  (.024) & 2020   \\
-1995 & 0.33 (.023) & 2064     \\
-1996 & 0.33  (.026) & 1580    \\
-1998 & 0.30  (.024) & 1733 \\
-2000 & 0.29  (.024) & 1865 \\
-2002 & 0.27  (.025) & 1988 \\
-2004 & 0.31  (.024) & 2185 \\
-2006 & 0.32  (.024) & 2111 \\
-2008 & 0.33  (.025)  & 2087  \\
-2010 & 0.33 (.026) & 2003 \\
-2012 & 0.35 (.027) & 1914 \\
-2014 & 0.37 (.028) & 1825  \\
-
-\midrule \bottomrule
-\end{longtable}
-
-\section{Appendix II}
-
-\begin{figure}[H]
-  \centering
-  \caption{Estimates for time trends in the IGE by Various quantiles.  The results are clearly non-stationary.}
-  \includegraphics[width=6in]{Graph15.pdf}
-\end{figure}
-\begin{figure}[H]
-  \centering
-  \caption{Estimates for time trends in the IRA by Various quantiles.  The results are show more stationarity than Figure 13, yet are still inconclusive.}
-  \includegraphics[width=6in]{Graph14.pdf}
-\end{figure}
 \end{document}
-
